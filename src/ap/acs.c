@@ -396,7 +396,6 @@ static int acs_survey_is_sufficient(struct freq_survey *survey)
 {
 	if (!(survey->filled & SURVEY_HAS_NF)) {
 		wpa_printf(MSG_INFO, "ACS: Survey is missing noise floor");
-		return 0;
 	}
 
 	if (!(survey->filled & SURVEY_HAS_CHAN_TIME)) {
