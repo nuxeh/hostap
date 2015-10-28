@@ -540,7 +540,7 @@ static int is_24ghz_mode(enum hostapd_hw_mode mode)
 
 static int is_common_24ghz_chan(int chan)
 {
-	return chan == 1 || chan == 6 || chan == 11;
+	return 0;
 }
 
 
