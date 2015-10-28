@@ -465,12 +465,18 @@ static int acs_surveys_are_sufficient(struct hostapd_iface *iface)
 
 static int acs_usable_chan(struct hostapd_channel_data *chan)
 {
-	if (dl_list_empty(&chan->survey_list))
+	if (dl_list_empty(&chan->survey_list)) {
+		printf("1\n");
 		return 0;
-	if (chan->flag & HOSTAPD_CHAN_DISABLED)
+	}
+	if (chan->flag & HOSTAPD_CHAN_DISABLED) {
+		printf("2\n");
 		return 0;
-	if (!acs_survey_list_is_sufficient(chan))
+	}
+	if (!acs_survey_list_is_sufficient(chan)) {
+		printf("3\n");
 		return 0;
+	}
 	return 1;
 }
 
@@ -494,8 +500,10 @@ static void acs_survey_all_chans_intereference_factor(
 	for (i = 0; i < iface->current_mode->num_channels; i++) {
 		chan = &iface->current_mode->channels[i];
 
-		if (!acs_usable_chan(chan))
+		if (!acs_usable_chan(chan)) {
+			printf("skipping !!!!!!\n");
 			continue;
+		}
 
 		if (!is_in_chanlist(iface, chan))
 			continue;
